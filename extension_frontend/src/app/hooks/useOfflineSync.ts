@@ -18,8 +18,10 @@ function sendToContentScript(message: Record<string, unknown>): Promise<any> {
         resolve(null);
         return;
       }
-      try {
-        chromeGlobal.tabs.sendMessage(tabs[0].id, message, (response: any) => {
+      const tabId = tabs[0].id;
+      
+      const trySendMessage = () => {
+        chromeGlobal.tabs.sendMessage(tabId, message, (response: any) => {
           if (chromeGlobal.runtime?.lastError) {
             console.warn('[Sync] Content script error:', chromeGlobal.runtime.lastError.message);
             resolve(null);
@@ -27,9 +29,35 @@ function sendToContentScript(message: Record<string, unknown>): Promise<any> {
             resolve(response);
           }
         });
-      } catch (e) {
-        resolve(null);
-      }
+      };
+
+      // Try sending the message first
+      chromeGlobal.tabs.sendMessage(tabId, message, (response: any) => {
+        if (chromeGlobal.runtime?.lastError) {
+          // If the receiving end does not exist, the content script might not be injected yet.
+          // Try to inject it manually using chrome.scripting.
+          if (chromeGlobal.scripting && chromeGlobal.scripting.executeScript) {
+             console.log('[Sync] Attempting to inject content.js manually...');
+             chromeGlobal.scripting.executeScript({
+               target: { tabId: tabId },
+               files: ['content.js']
+             }, () => {
+               if (chromeGlobal.runtime.lastError) {
+                 console.warn('[Sync] Failed to inject content script:', chromeGlobal.runtime.lastError.message);
+                 resolve(null);
+               } else {
+                 // Wait a brief moment for the script to initialize
+                 setTimeout(trySendMessage, 200);
+               }
+             });
+          } else {
+             console.warn('[Sync] Content script error:', chromeGlobal.runtime.lastError.message);
+             resolve(null);
+          }
+        } else {
+          resolve(response);
+        }
+      });
     });
   });
 }

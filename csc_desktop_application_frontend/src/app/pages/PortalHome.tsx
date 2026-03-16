@@ -1,18 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router';
-const bannerImg = '/slider8.jpg.jpeg';
+import bannerImgRaw from '../../assets/slider8.jpg.jpeg';
 import { AshokChakra } from '../components/AshokChakra';
+import i1 from '../../assets/i1.png';
+import i2 from '../../assets/i2.png';
+import i3 from '../../assets/i3.png';
+import i4 from '../../assets/i4.png';
+import i5 from '../../assets/i5.png';
+import i6 from '../../assets/i6.png';
+import i7 from '../../assets/i7.png';
+import i8 from '../../assets/i8.png';
+
+const bannerImg = bannerImgRaw;
 
 const services = [
-  { icon: '/i1.png', emoji: '👶', label: 'जन्म प्रमाण पत्र', labelEn: 'Birth Certificate', days: '7 कार्य दिवस', fee: '₹30' },
-  { icon: '/i2.png', emoji: '🕊️', label: 'मृत्यु प्रमाण पत्र', labelEn: 'Death Certificate', days: '7 कार्य दिवस', fee: '₹30' },
-  { icon: '/i3.png', emoji: '📄', label: 'आय प्रमाण पत्र', labelEn: 'Income Certificate', days: '10 कार्य दिवस', fee: '₹20' },
-  { icon: '/i4.png', emoji: '🏷️', label: 'जाति प्रमाण पत्र', labelEn: 'Caste Certificate', days: '15 कार्य दिवस', fee: '₹20' },
-  { icon: '/i5.png', emoji: '🏠', label: 'निवास प्रमाण पत्र', labelEn: 'Residence Certificate', days: '10 कार्य दिवस', fee: '₹20' },
-  { icon: '/i6.png', emoji: '💍', label: 'विवाह पंजीकरण', labelEn: 'Marriage Registration', days: '15 कार्य दिवस', fee: '₹100' },
-  { icon: '/i7.png', emoji: '👴', label: 'पेंशन योजना', labelEn: 'Pension Schemes', days: '30 कार्य दिवस', fee: '₹0' },
+  { icon: i1, emoji: '👶', label: 'जन्म प्रमाण पत्र', labelEn: 'Birth Certificate', days: '7 कार्य दिवस', fee: '₹30' },
+  { icon: i2, emoji: '🕊️', label: 'मृत्यु प्रमाण पत्र', labelEn: 'Death Certificate', days: '7 कार्य दिवस', fee: '₹30' },
+  { icon: i3, emoji: '📄', label: 'आय प्रमाण पत्र', labelEn: 'Income Certificate', days: '10 कार्य दिवस', fee: '₹20' },
+  { icon: i4, emoji: '🏷️', label: 'जाति प्रमाण पत्र', labelEn: 'Caste Certificate', days: '15 कार्य दिवस', fee: '₹20' },
+  { icon: i5, emoji: '🏠', label: 'निवास प्रमाण पत्र', labelEn: 'Residence Certificate', days: '10 कार्य दिवस', fee: '₹20' },
+  { icon: i6, emoji: '💍', label: 'विवाह पंजीकरण', labelEn: 'Marriage Registration', days: '15 कार्य दिवस', fee: '₹100' },
+  { icon: i7, emoji: '👴', label: 'पेंशन योजना', labelEn: 'Pension Schemes', days: '30 कार्य दिवस', fee: '₹0' },
   { icon: null,      emoji: '🎓', label: 'शैक्षिक प्रमाण पत्र', labelEn: 'Educational Certificate', days: '7 कार्य दिवस', fee: '₹50' },
-  { icon: '/i8.png', emoji: '🌾', label: 'किसान पंजीकरण', labelEn: 'Farmer Registration', days: '5 कार्य दिवस', fee: '₹0' },
+  { icon: i8, emoji: '🌾', label: 'किसान पंजीकरण', labelEn: 'Farmer Registration', days: '5 कार्य दिवस', fee: '₹0' },
 ];
 
 const stats = [

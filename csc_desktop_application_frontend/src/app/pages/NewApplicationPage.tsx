@@ -3,6 +3,15 @@ import { useNavigate } from 'react-router';
 import { ChevronRight, User, Phone, MapPin, MessageCircle, Send, Bot, CheckCircle, AlertCircle, Loader2 } from 'lucide-react';
 import { chatWithOllama, checkOllama, type ChatMessage } from '@/app/api/ollamaChatApi';
 
+import i1 from '../../assets/i1.png';
+import i2 from '../../assets/i2.png';
+import i3 from '../../assets/i3.png';
+import i4 from '../../assets/i4.png';
+import i5 from '../../assets/i5.png';
+import i6 from '../../assets/i6.png';
+import i7 from '../../assets/i7.png';
+import i8 from '../../assets/i8.png';
+
 const services = [
   { id: 'birth', emoji: '👶', label: 'जन्म प्रमाण पत्र', labelEn: 'Birth Certificate', docs: 3, days: '7' },
   { id: 'death', emoji: '🕊️', label: 'मृत्यु प्रमाण पत्र', labelEn: 'Death Certificate', docs: 4, days: '7' },
@@ -223,21 +232,21 @@ export function NewApplicationPage() {
                   >
                     <div className="flex items-center justify-between mb-2">
                       {svc.id === 'birth' ? (
-                        <img src="/i1.png" alt="Birth Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i1} alt="Birth Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'death' ? (
-                        <img src="/i2.png" alt="Death Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i2} alt="Death Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'income' ? (
-                        <img src="/i3.png" alt="Income Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i3} alt="Income Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'caste' ? (
-                        <img src="/i4.png" alt="Caste Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i4} alt="Caste Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'residence' ? (
-                        <img src="/i5.png" alt="Residence Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i5} alt="Residence Certificate" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'marriage' ? (
-                        <img src="/i6.png" alt="Marriage Registration" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i6} alt="Marriage Registration" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'farmer' ? (
-                        <img src="/i7.png" alt="Farmer Registration" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i7} alt="Farmer Registration" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : svc.id === 'pension' ? (
-                        <img src="/i8.png" alt="Pension Schemes" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                        <img src={i8} alt="Pension Schemes" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                       ) : (
                         <span style={{ fontSize: '30px' }}>{svc.emoji}</span>
                       )}

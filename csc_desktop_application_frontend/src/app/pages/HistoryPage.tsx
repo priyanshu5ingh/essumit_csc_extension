@@ -67,7 +67,17 @@ export function HistoryPage() {
       });
       if (res.ok) {
         // Find mapped URL if possible, otherwise default state portal
-        window.open('https://edistrict.cgstate.gov.in/PACE/login.do', '_blank');
+        try {
+          // If running in Electron context with preload script
+          if (window.electronAPI && window.electronAPI.openExternal) {
+            window.electronAPI.openExternal('https://edistrict.cgstate.gov.in/PACE/login.do');
+          } else {
+            // Fallback for browser testing
+            window.open('https://edistrict.cgstate.gov.in/PACE/login.do', '_blank', 'noopener,noreferrer');
+          }
+        } catch (err) {
+            window.open('https://edistrict.cgstate.gov.in/PACE/login.do', '_blank', 'noopener,noreferrer');
+        }
       } else {
         alert('Failed to stage sync. Ensure local server is running.');
       }

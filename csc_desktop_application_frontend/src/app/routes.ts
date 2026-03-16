@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router';
+import { createHashRouter } from 'react-router';
 import { PortalLayout } from './layouts/PortalLayout';
 import { AppLayout } from './layouts/AppLayout';
 import { PortalHome } from './pages/PortalHome';
@@ -18,7 +18,7 @@ import { CitizenRecordsPage } from './pages/CitizenRecordsPage';
 import { PlaceholderPage } from './pages/PlaceholderPage';
 import { RouterErrorBoundary } from './components/RouterErrorBoundary';
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: '/',
     Component: PortalLayout,
