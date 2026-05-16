@@ -9,6 +9,7 @@ import CitizenNotifications from './components/pages/CitizenNotifications';
 import ServiceCategories from './components/pages/ServiceCategories';
 import SystemLogs from './components/pages/SystemLogs';
 import Settings from './components/pages/Settings';
+import Profile from './components/pages/Profile';
 
 export const router = createBrowserRouter([
   {
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
       { path: 'services', Component: ServiceCategories },
       { path: 'logs', Component: SystemLogs },
       { path: 'settings', Component: Settings },
+      { path: 'profile', Component: Profile },
     ],
   },
 ]);

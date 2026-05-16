@@ -242,14 +242,14 @@ export default function Layout() {
         <Typography sx={{ fontSize: '13px', fontWeight: 700, color: GOV.navy }}>Admin User</Typography>
         <Typography sx={{ fontSize: '11px', color: '#6b7280' }}>District Officer · MeitY</Typography>
       </Box>
-      <MenuItem onClick={handleProfileClose} sx={{ color: GOV.navy }}>
-        <ManageAccountsIcon sx={{ fontSize: 18, color: GOV.blue }} />
-        My Profile
-      </MenuItem>
-      <MenuItem onClick={handleProfileClose} sx={{ color: GOV.navy }}>
-        <AccountCircleIcon sx={{ fontSize: 18, color: GOV.blue }} />
-        Account Settings
-      </MenuItem>
+      <MenuItem onClick={() => { handleProfileClose(); navigate('/profile'); }} sx={{ color: GOV.navy }}>
+  <ManageAccountsIcon sx={{ fontSize: 18, color: GOV.blue }} />
+  My Profile
+</MenuItem>
+<MenuItem onClick={() => { handleProfileClose(); navigate('/settings'); }} sx={{ color: GOV.navy }}>
+  <AccountCircleIcon sx={{ fontSize: 18, color: GOV.blue }} />
+  Account Settings
+</MenuItem>
       <Divider />
       <MenuItem onClick={handleProfileClose} sx={{ color: '#dc2626' }}>
         <LogoutIcon sx={{ fontSize: 18, color: '#dc2626' }} />
