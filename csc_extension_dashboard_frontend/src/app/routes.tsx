@@ -10,6 +10,12 @@ import ServiceCategories from './components/pages/ServiceCategories';
 import SystemLogs from './components/pages/SystemLogs';
 import Settings from './components/pages/Settings';
 import Profile from './components/pages/Profile';
+import CitizenLogin from './components/pages/auth/CitizenLogin';
+import GovernmentLogin from './components/pages/auth/GovernmentLogin';
+import LSKLogin from './components/pages/auth/LSKLogin';
+import eDMLogin from './components/pages/auth/eDMLogin';
+import LanguageSelection from './components/pages/settings/LanguageSelection';
+
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +32,11 @@ export const router = createBrowserRouter([
       { path: 'logs', Component: SystemLogs },
       { path: 'settings', Component: Settings },
       { path: 'profile', Component: Profile },
+      { path: 'auth/citizen', Component: CitizenLogin },
+      { path: 'auth/government', Component: GovernmentLogin },
+      { path: 'auth/lsk', Component: LSKLogin },
+      { path: 'auth/edm', Component: eDMLogin },
+      { path: 'settings/language', Component: LanguageSelection },
     ],
   },
 ]);

@@ -16,6 +16,7 @@ import Divider       from '@mui/material/Divider';
 import Avatar        from '@mui/material/Avatar';
 import Tabs          from '@mui/material/Tabs';
 import Tab           from '@mui/material/Tab';
+import Tooltip       from '@mui/material/Tooltip';
 
 /* ── MUI icons ────────────────────────────────────────────────── */
 import SearchIcon        from '@mui/icons-material/Search';
@@ -311,15 +312,21 @@ export default function Layout() {
         }}
       >
         {/* Language */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: alpha(GOV.white, 0.75), fontSize: '12px' }}>
-          <Box component="span" sx={{ color: GOV.white, fontWeight: 600, fontFamily: 'Noto Sans Devanagari, sans-serif' }}>अ</Box>
-          <Box component="span" sx={{ color: alpha(GOV.white, 0.3), mx: 0.5 }}>|</Box>
-          <Box component="span">A</Box>
-          <Box component="span" sx={{ color: alpha(GOV.white, 0.3), mx: 0.5 }}>|</Box>
-          <Box component="span">Select Language</Box>
-          <Box component="span" sx={{ color: alpha(GOV.white, 0.3), mx: 0.5 }}>|</Box>
-          <Box component="span" sx={{ color: GOV.white, fontFamily: 'Noto Sans Devanagari, sans-serif' }}>हिन्दी</Box>
-        </Box>
+        <Tooltip title="Currently under development">
+          <Box 
+            component="button" 
+            onClick={() => navigate('/settings/language')}
+            sx={{ display: 'flex', alignItems: 'center', gap: 0.5, color: alpha(GOV.white, 0.75), fontSize: '12px', background: 'none', border: 'none', cursor: 'pointer', p: 0, '&:hover': { color: GOV.white } }}
+          >
+            <Box component="span" sx={{ color: GOV.white, fontWeight: 600, fontFamily: 'Noto Sans Devanagari, sans-serif' }}>अ</Box>
+            <Box component="span" sx={{ color: alpha(GOV.white, 0.3), mx: 0.5 }}>|</Box>
+            <Box component="span">A</Box>
+            <Box component="span" sx={{ color: alpha(GOV.white, 0.3), mx: 0.5 }}>|</Box>
+            <Box component="span">Select Language</Box>
+            <Box component="span" sx={{ color: alpha(GOV.white, 0.3), mx: 0.5 }}>|</Box>
+            <Box component="span" sx={{ color: GOV.white, fontFamily: 'Noto Sans Devanagari, sans-serif' }}>हिन्दी</Box>
+          </Box>
+        </Tooltip>
         {/* Helpline */}
         <Box sx={{ display: { xs: 'none', sm: 'flex' }, alignItems: 'center', gap: 0.5, color: alpha(GOV.white, 0.65), fontSize: '12px', ml: 1 }}>
           <PhoneIcon sx={{ fontSize: 12 }}/>
@@ -328,12 +335,23 @@ export default function Layout() {
         <Box sx={{ flexGrow: 1 }}/>
         {/* Login links */}
         <Box sx={{ display: { xs: 'none', md: 'flex' }, alignItems: 'center', gap: 1.5, fontSize: '12px', color: alpha(GOV.white, 0.78) }}>
-          {['Citizen Login', 'Government Login', 'LSK Login', 'eDM Login'].map((lbl, i, arr) => (
-            <Box key={lbl} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-              <Box component="button" sx={{ color: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', p: 0,
-                '&:hover': { color: GOV.white } }}>
-                {lbl}
-              </Box>
+          {[
+            { label: 'Citizen Login', path: '/auth/citizen' },
+            { label: 'Government Login', path: '/auth/government' },
+            { label: 'LSK Login', path: '/auth/lsk' },
+            { label: 'eDM Login', path: '/auth/edm' }
+          ].map((item, i, arr) => (
+            <Box key={item.label} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+              <Tooltip title="Currently under development">
+                <Box 
+                  component="button" 
+                  onClick={() => navigate(item.path)}
+                  sx={{ color: 'inherit', background: 'none', border: 'none', cursor: 'pointer', fontSize: '12px', p: 0,
+                  '&:hover': { color: GOV.white } }}
+                >
+                  {item.label}
+                </Box>
+              </Tooltip>
               {i < arr.length - 1 && <Box component="span" sx={{ color: alpha(GOV.white, 0.25) }}>|</Box>}
             </Box>
           ))}
