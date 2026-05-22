@@ -11,12 +11,12 @@ export default function Layout() {
   const [isAIPopupOpen, setIsAIPopupOpen] = useState(false);
 
   return (
-    <div className="w-full h-screen flex flex-col bg-bg-primary">
-      <Header onOpenAI={() => setIsAIPopupOpen(true)} />
+    <div className="w-full min-h-screen flex flex-col bg-bg-primary relative">
+      <Header onOpenAI={() => setIsAIPopupOpen(true)} className="flex-shrink-0 sticky top-0 z-30" />
       {!isWelcome && !isAIAssistant && <ProgressStepper />}
-      <div className="flex-1 overflow-y-auto">
+      <main className="flex-1 w-full focus:outline-none pb-16">
         <Outlet />
-      </div>
+      </main>
       <AIAssistantPopup isOpen={isAIPopupOpen} onClose={() => setIsAIPopupOpen(false)} />
     </div>
   );
