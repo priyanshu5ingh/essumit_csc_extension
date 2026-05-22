@@ -11,6 +11,7 @@ from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from werkzeug.utils import secure_filename
+from werkzeug.exceptions import RequestEntityTooLarge
 import threading
 import requests
 from typing import Dict, List
@@ -34,6 +35,13 @@ UPLOAD_FOLDER = 'uploads'
 RESULTS_FOLDER = 'results'
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg', 'tiff', 'bmp'}
 MAX_FILE_SIZE = 16 * 1024 * 1024  # 16MB
+OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://127.0.0.1:11434")
+
+app.config['MAX_CONTENT_LENGTH'] = MAX_FILE_SIZE
+
+@app.errorhandler(RequestEntityTooLarge)
+def handle_file_too_large(e):
+    return jsonify({'error': f'File size exceeds the maximum limit of {MAX_FILE_SIZE // (1024 * 1024)}MB'}), 413
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
@@ -157,7 +165,7 @@ def process_job_async(job_id: str, file_path: str, fields: List[str], pipeline: 
                 system_prompt = "You are a data extraction assistant. Extract the requested fields from the OCR text. Return ONLY a pure JSON object, no markdown."
                 user_prompt = f"Extract these fields: {', '.join(fields)}\n\nText:\n{text}"
                 
-                response = requests.post('http://127.0.0.1:11434/api/generate', json={
+                response = requests.post(f'{OLLAMA_HOST}/api/generate', json={
                     "model": "llama3.2:latest",
                     "prompt": f"{system_prompt}\n\n{user_prompt}",
                     "stream": False,
@@ -482,7 +490,7 @@ Reply with valid JSON dictionary ONLY."""
         
         user_prompt = f"Field Name: {field_name}\nExtracted Value: {field_value}\n\nValidate the extracted value. Output ONLY valid JSON containing 'valid' (boolean) and 'reason' (string)."
         
-        response = requests.post('http://127.0.0.1:11434/api/generate', json={
+        response = requests.post(f'{OLLAMA_HOST}/api/generate', json={
             "model": "llama3.2:latest",
             "prompt": f"{system_prompt}\n\n{user_prompt}",
             "stream": False,
