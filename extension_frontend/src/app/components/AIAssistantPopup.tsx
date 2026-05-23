@@ -142,7 +142,12 @@ export default function AIAssistantPopup({ isOpen, onClose }: AIAssistantPopupPr
           </div>
           <div className="flex items-center gap-2">
             <button
-              onClick={() => setIsMinimized(!isMinimized)}
+              onClick={() => {
+                if (!isMinimized && isListening) {
+                  stopListening();
+                }
+                setIsMinimized(!isMinimized);
+              }}
               className="w-7 h-7 rounded hover:bg-white/10 flex items-center justify-center transition-colors"
             >
               {isMinimized ? (
