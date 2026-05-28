@@ -117,12 +117,11 @@ export default function SubmissionSuccess() {
 
   return (
     <div className="h-full flex items-center justify-center p-6">
-      <div className="w-full max-w-sm text-center" ref={printRef}>
-        {/* Success Animation */}
+      <div className="w-full max-w-sm text-center animate-slideUp" ref={printRef}>
         <div className="mb-6">
           <div className="relative inline-flex items-center justify-center">
             <svg className="w-24 h-24" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="45" fill="none" stroke="#138944" strokeWidth="2" />
+              <circle cx="50" cy="50" r="45" fill="none" stroke="#138944" strokeWidth="2" opacity="0.3" />
               {Array.from({ length: 24 }).map((_, i) => {
                 const angle = (i * 360) / 24;
                 const rad = (angle * Math.PI) / 180;
@@ -139,13 +138,13 @@ export default function SubmissionSuccess() {
                     y2={y2}
                     stroke="#138944"
                     strokeWidth="1.5"
-                    opacity="0.4"
+                    opacity={i % 3 === 0 ? '0.6' : '0.25'}
                   />
                 );
               })}
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-20 h-20 rounded-full bg-green flex items-center justify-center">
+              <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green to-green-deep flex items-center justify-center shadow-xl shadow-green/30 animate-bounce">
                 <CheckCircle2 className="w-11 h-11 text-white" strokeWidth={2.5} />
               </div>
             </div>
@@ -153,53 +152,55 @@ export default function SubmissionSuccess() {
         </div>
 
         <div className="mb-6">
-          <h1 className="text-lg font-semibold text-green mb-1">आवेदन जमा हो गया!</h1>
-          <p className="text-sm text-muted-text">Application Submitted Successfully</p>
+          <h1 className="text-lg font-bold text-green mb-1">आवेदन जमा हो गया!</h1>
+          <p className="text-sm text-muted-text font-medium">Application Submitted Successfully</p>
         </div>
 
         <div className="mb-5">
-          <div className="inline-block px-4 py-2 rounded-md bg-navy text-white font-mono font-semibold text-xs">
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-navy to-navy-light text-white font-mono font-bold text-sm shadow-lg shadow-navy/20">
+            <span className="text-[10px] text-slate-300 font-sans font-medium uppercase tracking-wider">REF:</span>
             {refId}
           </div>
         </div>
 
-        {/* WhatsApp + Print */}
-        <div className="mb-8 flex flex-col gap-2">
+        <div className="mb-8 flex flex-col gap-2.5 justify-center">
           {whatsappUrl && (
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-green-light text-green text-xs font-medium border border-green/20 hover:bg-green/10 transition-colors"
+              className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-green-light to-green-light/50 text-green-deep text-xs font-bold border-2 border-green/30 hover:bg-green/10 hover:border-green/50 transition-all duration-200 active:scale-[0.98] shadow-sm"
             >
-              <MessageSquare className="w-3.5 h-3.5" strokeWidth={2} />
+              <MessageSquare className="w-4 h-4" strokeWidth={2} />
               <span>WhatsApp पर भेजें</span>
             </a>
           )}
           <button
             onClick={handlePrint}
-            className="inline-flex items-center justify-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 text-slate-700 text-xs font-medium border border-slate-200 hover:bg-slate-200 transition-colors"
+            className="inline-flex items-center justify-center gap-2.5 px-5 py-2.5 rounded-xl bg-gradient-to-r from-slate-50 to-white text-slate-700 text-xs font-bold border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-100 transition-all duration-200 active:scale-[0.98] shadow-sm"
           >
-            <Printer className="w-3.5 h-3.5" strokeWidth={2} />
+            <Printer className="w-4 h-4" strokeWidth={2} />
             <span>रसीद प्रिंट करें</span>
           </button>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           <button
             onClick={() => navigate('/welcome')}
-            className="w-full h-11 rounded-md bg-saffron hover:bg-saffron-hover text-white font-medium text-sm flex items-center justify-between px-4 transition-colors"
+            className="w-full h-12 rounded-xl bg-gradient-to-r from-saffron to-saffron-deep hover:from-saffron-hover hover:to-saffron-deep text-white font-bold text-sm flex items-center justify-between px-5 transition-all duration-200 shadow-md shadow-saffron/20 active:scale-[0.98] group"
           >
-            <div className="flex items-center gap-2">
-              <FileText className="w-4 h-4" strokeWidth={2} />
+            <div className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center">
+                <FileText className="w-4 h-4" strokeWidth={2} />
+              </div>
               <span>नया आवेदन / New Application</span>
             </div>
-            <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
           </button>
 
           <button
             onClick={() => navigate('/welcome')}
-            className="w-full h-9 text-saffron font-medium text-sm hover:underline"
+            className="w-full h-10 text-saffron font-bold text-sm hover:text-saffron-deep transition-colors"
           >
             इतिहास देखें / View History
           </button>

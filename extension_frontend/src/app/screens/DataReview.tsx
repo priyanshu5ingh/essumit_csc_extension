@@ -215,31 +215,29 @@ export default function DataReview() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto py-6">
-        {/* Bot Message */}
         <ChatBubble
           type="bot"
           titleHi="AI ने यह जानकारी निकाली"
           titleEn="AI extracted this information"
         />
 
-        {/* AI Validation Loading / Summary Banner */}
         {validationLoading && (
-          <div className="px-4 mb-3">
-            <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 flex items-center gap-2">
+          <div className="px-4 mb-3 animate-slideUp">
+            <div className="rounded-xl border border-slate-200 bg-gradient-to-r from-slate-50 to-white p-3.5 flex items-center gap-2.5 shadow-sm">
               <Loader2 className="w-4 h-4 text-saffron animate-spin" strokeWidth={2} />
-              <span className="text-xs text-slate-600">AI सत्यापन कर रहा है...</span>
+              <span className="text-xs text-slate-600 font-medium">AI सत्यापन कर रहा है...</span>
             </div>
           </div>
         )}
         {validation && !validationLoading && (
-          <div className="px-4 mb-3">
+          <div className="px-4 mb-3 animate-slideUp">
             <div
-              className={`rounded-lg border-l-4 p-3 ${
+              className={`rounded-xl border-l-4 p-3.5 ${
                 validation.overallRisk === 'HIGH'
-                  ? 'bg-red-50 border-risk-red'
+                  ? 'bg-gradient-to-r from-red-50 to-red-50/30 border-risk-red'
                   : validation.overallRisk === 'MEDIUM'
-                  ? 'bg-amber-50 border-risk-amber'
-                  : 'bg-green-light border-green'
+                  ? 'bg-gradient-to-r from-amber-50 to-amber-50/30 border-risk-amber'
+                  : 'bg-gradient-to-r from-green-light to-green-light/30 border-green'
               }`}
             >
               <div className="flex items-start justify-between gap-2">
@@ -256,7 +254,7 @@ export default function DataReview() {
                   type="button"
                   onClick={handleRevalidate}
                   disabled={validationLoading}
-                  className="shrink-0 px-2 py-1 rounded text-[10px] font-medium bg-white border border-slate-300 text-slate-600 hover:bg-slate-50"
+                  className="shrink-0 px-2.5 py-1 rounded-lg text-[10px] font-semibold bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 hover:border-slate-400 transition-colors"
                 >
                   फिर सत्यापित करें
                 </button>
@@ -265,16 +263,15 @@ export default function DataReview() {
           </div>
         )}
 
-        {/* Data Review Card */}
-        <div className="px-4 mb-4">
-          <div className="bg-surface rounded-lg overflow-hidden border border-border-custom">
-            <div className="px-4 py-3 bg-navy flex items-center justify-between">
+        <div className="px-4 mb-4 animate-slideUp">
+          <div className="bg-surface rounded-xl overflow-hidden border border-border-custom shadow-card">
+            <div className="px-4 py-3.5 bg-gradient-to-r from-navy to-navy-light flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Database className="w-4 h-4 text-white" strokeWidth={2} />
-                <span className="text-white font-semibold text-sm">निकाली गई जानकारी</span>
+                <span className="text-white font-bold text-sm">निकाली गई जानकारी</span>
               </div>
-              <div className="px-2.5 py-1 rounded bg-amber-500/20 text-white text-[10px] font-semibold">
-                {fields.length} फ़ील्ड्स • {warningCount} चेतावनी
+              <div className="px-2.5 py-1 rounded-lg bg-amber-500/20 backdrop-blur-sm text-white text-[10px] font-semibold">
+                {fields.length} फ़ील्ड्स &bull; {warningCount} चेतावनी
               </div>
             </div>
 
@@ -286,11 +283,11 @@ export default function DataReview() {
                 return (
                   <div
                     key={field.id}
-                    className={`px-4 py-3 ${confidenceStyle.border} ${confidenceStyle.bg}`}
+                    className={`px-4 py-3.5 ${confidenceStyle.border} ${confidenceStyle.bg} transition-colors`}
                   >
                     <div className="flex items-center gap-3">
-                      <div className="flex-1">
-                        <div className="text-xs text-muted-text mb-1.5">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs text-muted-text font-medium mb-1">
                           {field.labelHi} / {field.labelEn}
                         </div>
                         <input
@@ -298,12 +295,11 @@ export default function DataReview() {
                           value={field.value}
                           onChange={(e) => handleFieldChange(field.id, e.target.value)}
                           placeholder={field.confidence === 0 ? 'खाली' : ''}
-                          className={`w-full text-sm font-semibold text-navy bg-transparent border-none outline-none focus:ring-0 p-0 placeholder:text-slate-400 ${confidenceStyle.ringClass}`}
+                          className={`w-full text-sm font-bold text-navy bg-transparent border-b-2 border-transparent focus:border-saffron/50 outline-none p-0 pb-0.5 placeholder:text-slate-400 transition-colors duration-200`}
                         />
-                        {/* AI Validation for this field - always show when validation done */}
                         {validation && !validationLoading && (
                           <div
-                            className={`mt-2 text-[10px] rounded px-2 py-1 flex items-center gap-1 ${
+                            className={`mt-2 text-[10px] rounded-lg px-2.5 py-1 flex items-center gap-1.5 ${
                               field.validationMsg
                                 ? 'bg-amber-50 border border-amber-200 text-amber-800'
                                 : 'bg-green-light/70 border border-green/30 text-green-800'
@@ -314,19 +310,19 @@ export default function DataReview() {
                               <>
                                 <span>{field.validationMsg}</span>
                                 {field.validationSuggestion && (
-                                  <span className="text-saffron">→ {field.validationSuggestion}</span>
+                                  <span className="text-saffron font-semibold">&rarr; {field.validationSuggestion}</span>
                                 )}
                               </>
                             ) : (
-                              <span>AI ✓ नियमों के अनुसार</span>
+                              <span>AI &check; नियमों के अनुसार</span>
                             )}
                           </div>
                         )}
                       </div>
 
-                      <div className={`flex flex-col items-center gap-1 ${confidenceStyle.text}`}>
+                      <div className={`flex flex-col items-center gap-1 ${confidenceStyle.text} min-w-[48px]`}>
                         <ConfidenceIcon className="w-4 h-4" strokeWidth={2} />
-                        <div className="text-xs font-mono font-semibold">{field.confidence}%</div>
+                        <div className="text-xs font-mono font-bold">{field.confidence}%</div>
                       </div>
                     </div>
                   </div>
@@ -341,8 +337,8 @@ export default function DataReview() {
                   <div className="flex-1">
                     <div className="text-sm font-semibold text-risk-amber mb-1">दस्तावेज़ों में अंतर मिला</div>
                     {extraction.crossDocumentMismatches.map((m: { field: string; val1: string; val2: string }, i: number) => (
-                      <div key={i} className="text-xs text-slate bg-white p-2.5 rounded mb-3 border border-amber-200">
-                        {m.field}: {m.val1} vs {m.val2}
+                      <div key={i} className="text-xs text-slate bg-white p-2.5 rounded-lg mb-2 border border-amber-200 shadow-sm">
+                        <span className="font-semibold">{m.field}:</span> {m.val1} vs {m.val2}
                       </div>
                     ))}
                   </div>
@@ -355,7 +351,8 @@ export default function DataReview() {
 
       <div className="px-4 pb-2 space-y-2">
         {autofillFailed && (
-          <div className="rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+          <div className="rounded-xl border border-amber-300 bg-gradient-to-r from-amber-50 to-white px-3.5 py-2.5 text-xs text-amber-800 shadow-sm flex items-center gap-2">
+            <AlertTriangle className="w-4 h-4 text-risk-amber flex-shrink-0" strokeWidth={2} />
             फॉर्म भर नहीं सका। फॉर्म वाला टैब खुला रखें, पेज रिफ्रेश करें और फिर से कोशिश करें।
           </div>
         )}
@@ -365,13 +362,18 @@ export default function DataReview() {
               type="button"
               onClick={handleAutofill}
               disabled={autofillLoading}
-              className="px-4 py-1.5 rounded-md text-xs font-medium bg-green-light text-green border border-green/30 hover:bg-green/10"
+              className="px-5 py-2 rounded-xl text-xs font-bold bg-gradient-to-r from-green-light to-green-light/50 text-green-deep border-2 border-green/30 hover:bg-green/10 active:scale-[0.97] transition-all duration-200 shadow-sm"
             >
-              {autofillLoading ? 'फॉर्म भर रहा है...' : 'फॉर्म ऑटो-फिल करें'}
+              {autofillLoading ? (
+                <span className="flex items-center gap-1.5">
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                  फॉर्म भर रहा है...
+                </span>
+              ) : 'फॉर्म ऑटो-फिल करें'}
             </button>
           </div>
         ) : null}
-        <p className="text-[10px] text-muted-text text-center">
+        <p className="text-[10px] text-muted-text text-center font-medium">
           संपादित करें, फिर ऑटो-फिल या सत्यापन दोहरा सकते हैं
         </p>
       </div>

@@ -1,56 +1,52 @@
-import { Building2, User } from 'lucide-react';
+import { Bot, User } from 'lucide-react';
 
-interface ChatBubbleProps {
+export interface ChatBubbleProps {
   type: 'bot' | 'user';
   titleHi?: string;
   titleEn?: string;
   content?: string;
-  children?: React.ReactNode;
   hasRedBorder?: boolean;
 }
 
-export default function ChatBubble({ type, titleHi, titleEn, content, children, hasRedBorder }: ChatBubbleProps) {
+export default function ChatBubble({ type, titleHi, titleEn, content, hasRedBorder }: ChatBubbleProps) {
   if (type === 'bot') {
     return (
-      <div className="flex gap-2.5 mb-4 px-4">
-        {/* Bot Avatar */}
-        <div className="w-7 h-7 rounded-full bg-saffron flex items-center justify-center flex-shrink-0 mt-0.5">
-          <Building2 className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
-        </div>
-        
-        {/* Bubble */}
-        <div className="flex-1">
-          <div 
-            className={`bg-surface rounded-lg rounded-tl-sm p-3.5 border ${
-              hasRedBorder ? 'border-l-2 border-risk-red border-t border-r border-b border-border-custom' : 'border-border-custom'
-            }`}
-          >
-            {(titleHi || titleEn) && (
-              <div className="mb-1">
-                {titleHi && <div className="text-sm font-semibold text-navy">{titleHi}</div>}
-                {titleEn && <div className="text-xs text-muted-text">{titleEn}</div>}
+      <div className="px-4 mb-4 animate-slideUp">
+        <div className={`flex items-start gap-2.5 ${
+          hasRedBorder
+            ? 'bg-gradient-to-r from-red-50 to-red-50/50 border border-red-200'
+            : 'bg-gradient-to-r from-saffron-light to-amber-50 border border-saffron/10'
+        } rounded-xl p-3.5 shadow-sm`}>
+          <div className={`w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 ${
+            hasRedBorder ? 'bg-red-100' : 'bg-saffron/10'
+          }`}>
+            <Bot className={`w-4 h-4 ${hasRedBorder ? 'text-red-500' : 'text-saffron'}`} strokeWidth={2} />
+          </div>
+          <div className="flex-1 min-w-0">
+            {titleHi && (
+              <div className={`text-sm font-semibold mb-0.5 ${hasRedBorder ? 'text-red-700' : 'text-navy'}`}>
+                {titleHi}
               </div>
             )}
-            {content && <div className="text-sm text-slate">{content}</div>}
-            {children}
+            {titleEn && (
+              <div className="text-xs text-muted-text font-medium">
+                {titleEn}
+              </div>
+            )}
           </div>
         </div>
       </div>
     );
   }
 
-  // User bubble
   return (
-    <div className="flex justify-end mb-4 px-4">
-      <div className="flex gap-2.5">
-        <div className="bg-green-light border border-green/20 rounded-lg rounded-tr-sm p-3 max-w-[75%]">
-          <div className="text-sm text-green-deep font-medium">
-            {content || children}
-          </div>
+    <div className="px-4 mb-4 flex justify-end animate-slideUp">
+      <div className="flex items-end gap-2 max-w-[85%]">
+        <div className="bg-gradient-to-br from-saffron to-saffron-deep text-white rounded-2xl rounded-br-md px-4 py-2.5 shadow-md shadow-saffron/20">
+          <div className="text-sm font-medium leading-relaxed">{content}</div>
         </div>
-        {/* User Avatar */}
-        <div className="w-7 h-7 rounded-full bg-green flex items-center justify-center flex-shrink-0 mt-0.5">
-          <User className="w-3.5 h-3.5 text-white" strokeWidth={2.5} />
+        <div className="w-7 h-7 rounded-full bg-saffron/20 flex items-center justify-center flex-shrink-0 mb-0.5">
+          <User className="w-3.5 h-3.5 text-saffron" strokeWidth={2.5} />
         </div>
       </div>
     </div>

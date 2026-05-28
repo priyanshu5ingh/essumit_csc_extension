@@ -1,18 +1,16 @@
 import { useNavigate } from 'react-router';
-import { FileText, Bot, ChevronRight } from 'lucide-react';
+import { FileText, Bot, ChevronRight, Sparkles } from 'lucide-react';
 
 export default function Welcome() {
   const navigate = useNavigate();
 
   return (
     <div className="h-full flex items-center justify-center px-4 py-8">
-      <div className="w-full max-w-sm">
-        <div className="bg-surface rounded-lg p-6 border border-border-custom shadow-sm">
-
-          {/* Header */}
-          <div className="mb-6">
-            <div className="w-12 h-12 rounded-lg bg-saffron/10 flex items-center justify-center mb-3">
-              <svg className="w-7 h-7 text-saffron" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+      <div className="w-full max-w-sm animate-slideUp">
+        <div className="bg-surface rounded-xl p-6 border border-border-custom shadow-card">
+          <div className="mb-6 text-center">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-saffron to-saffron-deep flex items-center justify-center mx-auto mb-4 shadow-lg shadow-saffron/20">
+              <svg className="w-7 h-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"/>
                 <circle cx="12" cy="12" r="6"/>
                 <circle cx="12" cy="12" r="2"/>
@@ -26,41 +24,44 @@ export default function Welcome() {
                 <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
               </svg>
             </div>
-            <h2 className="text-lg font-semibold text-navy mb-1">नमस्ते, Welcome</h2>
-            <p className="text-sm text-muted-text">Digital India service delivery platform</p>
+            <h2 className="text-lg font-bold text-navy mb-1">नमस्ते, Welcome</h2>
+            <p className="text-sm text-muted-text font-medium">Digital India service delivery platform</p>
           </div>
 
-          {/* New Application */}
           <button
             onClick={() => navigate('/citizen-details')}
-            className="w-full h-11 rounded-md bg-green hover:bg-green-hover text-white font-medium text-sm mb-3 flex items-center justify-between px-4 transition-colors"
+            className="w-full h-12 rounded-xl bg-gradient-to-r from-green to-green-deep hover:from-green-hover hover:to-green-deep text-white font-semibold text-sm flex items-center justify-between px-5 transition-all duration-200 shadow-md shadow-green/20 active:scale-[0.98] group mb-1"
           >
-            <div className="flex items-center gap-2.5">
-              <FileText className="w-4 h-4" strokeWidth={2} />
+            <div className="flex items-center gap-3">
+              <div className="w-7 h-7 rounded-lg bg-white/15 flex items-center justify-center">
+                <FileText className="w-4 h-4" strokeWidth={2} />
+              </div>
               <span>नया आवेदन शुरू करें</span>
             </div>
-            <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
           </button>
-          <p className="text-xs text-muted-text mb-5 px-1">Start New Application</p>
+          <p className="text-xs text-muted-text mb-5 px-1 font-medium">Start New Application</p>
 
-          {/* AI Assistant */}
           <button
             onClick={() => navigate('/ai-assistant')}
-            className="w-full h-11 rounded-md bg-surface border border-border-strong hover:bg-slate-50 text-navy font-medium text-sm flex items-center justify-between px-4 transition-colors mb-3"
+            className="w-full h-12 rounded-xl bg-surface border-2 border-slate-200 hover:border-saffron/30 hover:bg-saffron-light/20 text-navy font-semibold text-sm flex items-center justify-between px-5 transition-all duration-200 active:scale-[0.98] group"
           >
-            <div className="flex items-center gap-2.5">
-              <Bot className="w-4 h-4" strokeWidth={2} />
+            <div className="flex items-center gap-3">
+              <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-saffron/20 to-saffron/10 flex items-center justify-center">
+                <Bot className="w-4 h-4 text-saffron" strokeWidth={2} />
+              </div>
               <span>AI सहायक से बात करें</span>
             </div>
-            <ChevronRight className="w-4 h-4" strokeWidth={2.5} />
+            <ChevronRight className="w-4 h-4 text-saffron group-hover:translate-x-0.5 transition-transform" strokeWidth={2.5} />
           </button>
-          <p className="text-xs text-muted-text mb-5 px-1">Chat with AI Assistant</p>
+          <p className="text-xs text-muted-text px-1 font-medium">Chat with AI Assistant</p>
 
-          {/* Footer */}
-          <div className="mt-6 pt-5 border-t border-border-custom text-center">
-            <p className="text-[10px] text-muted-text">
-              v1.0.0 • CHIPS Chhattisgarh • Government of India
-            </p>
+          <div className="mt-6 pt-5 border-t border-border-custom">
+            <div className="flex items-center justify-center gap-2 text-[10px] text-muted-text">
+              <Sparkles className="w-3 h-3 text-saffron" strokeWidth={2} />
+              <span>v1.0.0 &mdash; CHIPS Chhattisgarh &mdash; Government of India</span>
+              <Sparkles className="w-3 h-3 text-saffron" strokeWidth={2} />
+            </div>
           </div>
         </div>
       </div>

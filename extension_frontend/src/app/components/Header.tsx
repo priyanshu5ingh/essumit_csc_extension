@@ -18,26 +18,24 @@ export default function Header({ onOpenAI }: HeaderProps) {
           : 'ऑफ़लाइन ऐप सिंक करें (Desktop App → form auto-fill)';
 
   return (
-    <header className="h-14 flex items-center justify-between px-4 bg-navy border-b border-navy-light">
+    <header className="h-14 flex items-center justify-between px-4 bg-gradient-to-r from-navy to-[#1e2a3d] border-b border-white/5">
       <div className="flex items-center gap-2.5">
-        {/* Government Emblem Icon */}
-        <div className="w-8 h-8 rounded-full bg-saffron flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-saffron to-saffron-deep flex items-center justify-center shadow-lg shadow-saffron/20">
           <Building2 className="w-4 h-4 text-white" strokeWidth={2.5} />
         </div>
         <div>
           <h1 className="text-sm font-semibold text-white tracking-tight">
             CSC सहायक
           </h1>
-          <p className="text-[10px] text-slate-300 leading-none">Digital Service Portal</p>
+          <p className="text-[10px] text-slate-400 leading-none font-medium">Digital Service Portal</p>
         </div>
       </div>
 
       <div className="flex items-center gap-1.5">
-        {/* Offline Sync – small icon button, top right */}
         <button
           onClick={triggerSync}
           disabled={syncState === 'loading'}
-          className="w-7 h-7 rounded flex items-center justify-center transition-colors border border-slate-500/50 hover:bg-white/10 text-slate-300 hover:text-white disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-7 h-7 rounded-md flex items-center justify-center transition-all duration-200 border border-white/10 hover:bg-white/10 text-slate-400 hover:text-white disabled:opacity-60 disabled:cursor-not-allowed"
           title={syncTitle}
         >
           {syncState === 'loading' && <RefreshCw className="w-3.5 h-3.5 animate-spin" strokeWidth={2} />}
@@ -46,18 +44,16 @@ export default function Header({ onOpenAI }: HeaderProps) {
           {(syncState === 'idle' || !syncState) && <RefreshCw className="w-3.5 h-3.5" strokeWidth={2} />}
         </button>
 
-        {/* AI Assistant Button */}
         <button
           onClick={onOpenAI}
-          className="w-9 h-9 rounded-md bg-saffron/20 hover:bg-saffron/30 flex items-center justify-center transition-colors group relative"
+          className="w-9 h-9 rounded-md bg-gradient-to-br from-saffron/20 to-saffron/10 hover:from-saffron/30 hover:to-saffron/20 flex items-center justify-center transition-all duration-200 group relative border border-saffron/10"
           title="AI सहायक"
         >
           <Bot className="w-4 h-4 text-saffron" strokeWidth={2} />
-          <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-green rounded-full border border-navy"></div>
+          <div className="absolute -bottom-0.5 -right-0.5 w-2 h-2 bg-green rounded-full border-2 border-navy"></div>
         </button>
 
-        {/* Status Indicator */}
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-green/10 border border-green/20">
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-green/10 border border-green/20">
           <Circle className="w-1.5 h-1.5 fill-green text-green animate-pulse" />
           <span className="text-[11px] font-medium text-green">Online</span>
         </div>

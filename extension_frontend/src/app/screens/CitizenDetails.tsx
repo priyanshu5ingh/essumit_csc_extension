@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { User, Phone } from 'lucide-react';
+import { User, Phone, Info } from 'lucide-react';
 import ChatBubble from '../components/ChatBubble';
 import NavigationButtons from '../components/NavigationButtons';
 
@@ -25,68 +25,66 @@ export default function CitizenDetails() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 overflow-y-auto py-6">
-        {/* Bot Message */}
         <ChatBubble 
           type="bot"
           titleHi="नागरिक की जानकारी दें"
           titleEn="Enter citizen details"
         />
 
-        {/* Input Form */}
-        <div className="px-4">
-          <form onSubmit={handleSubmit} className="space-y-3.5">
-            {/* Name Input */}
-            <div>
-              <label className="block text-xs font-semibold text-navy mb-1.5">
-                नाम / Name <span className="text-risk-red">*</span>
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text" strokeWidth={2} />
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="पूरा नाम लिखें"
-                  className="w-full h-11 pl-10 pr-4 rounded-md border border-border-custom bg-surface text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent"
-                  required
-                />
+        <div className="px-4 animate-slideUp">
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="bg-surface rounded-xl p-4 border border-border-custom shadow-card space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-navy mb-1.5">
+                  नाम / Name <span className="text-risk-red">*</span>
+                </label>
+                <div className="relative group">
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text group-focus-within:text-saffron transition-colors duration-200" strokeWidth={2} />
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="पूरा नाम लिखें / Enter full name"
+                    className="w-full h-11 pl-10 pr-4 rounded-lg border border-border-custom bg-white text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron/30 focus:border-saffron transition-all duration-200"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-semibold text-navy mb-1.5">
+                  मोबाइल / Mobile <span className="text-risk-red">*</span>
+                </label>
+                <div className="relative group">
+                  <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text group-focus-within:text-saffron transition-colors duration-200" strokeWidth={2} />
+                  <div className="absolute left-10 top-1/2 -translate-y-1/2 text-sm text-muted-text font-medium border-r border-border-custom pr-2">
+                    +91
+                  </div>
+                  <input
+                    type="tel"
+                    value={mobile}
+                    onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                    placeholder="10 अंकों का नंबर"
+                    className="w-full h-11 pl-[76px] pr-4 rounded-lg border border-border-custom bg-white text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron/30 focus:border-saffron transition-all duration-200"
+                    required
+                    maxLength={10}
+                  />
+                </div>
+                {mobile && mobile.length === 10 && (
+                  <div className="flex items-center gap-1.5 mt-1.5">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green"></div>
+                    <span className="text-[10px] text-green font-semibold">Valid number</span>
+                  </div>
+                )}
               </div>
             </div>
 
-            {/* Mobile Input */}
-            <div>
-              <label className="block text-xs font-semibold text-navy mb-1.5">
-                मोबाइल / Mobile <span className="text-risk-red">*</span>
-              </label>
-              <div className="relative">
-                <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text" strokeWidth={2} />
-                <div className="absolute left-10 top-1/2 -translate-y-1/2 text-sm text-muted-text">
-                  +91
-                </div>
-                <input
-                  type="tel"
-                  value={mobile}
-                  onChange={(e) => setMobile(e.target.value.replace(/\D/g, '').slice(0, 10))}
-                  placeholder="10 अंकों का नंबर"
-                  className="w-full h-11 pl-[68px] pr-4 rounded-md border border-border-custom bg-surface text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent"
-                  required
-                  maxLength={10}
-                />
-              </div>
-              {mobile && mobile.length === 10 && (
-                <div className="flex items-center gap-1.5 mt-1.5">
-                  <div className="w-1.5 h-1.5 rounded-full bg-green"></div>
-                  <span className="text-[10px] text-green font-medium">Valid number</span>
-                </div>
-              )}
-            </div>
-
-            {/* Info Box */}
-            <div className="bg-blue-50 border border-blue-200 rounded-md p-3 mt-4">
+            <div className="bg-blue-50/80 border border-blue-200/60 rounded-xl p-3.5 flex gap-2.5">
+              <Info className="w-4 h-4 text-blue-500 flex-shrink-0 mt-0.5" strokeWidth={2} />
               <div className="text-xs text-navy leading-relaxed">
                 <span className="font-semibold">ध्यान दें:</span> इस मोबाइल नंबर पर SMS आएगा।
                 <br />
-                <span className="text-[10px] text-muted-text">SMS will be sent to this mobile number.</span>
+                <span className="text-[10px] text-muted-text font-medium">SMS updates will be sent to this number.</span>
               </div>
             </div>
           </form>

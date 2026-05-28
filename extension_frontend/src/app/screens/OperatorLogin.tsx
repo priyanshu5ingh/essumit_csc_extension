@@ -31,60 +31,60 @@ export default function OperatorLogin() {
     }
     setLoading(true);
 
-setTimeout(() => {
-  navigate('/welcome');
-}, 1000);
+    setTimeout(() => {
+      navigate('/welcome');
+    }, 800);
   };
 
   return (
     <div className="h-full flex items-center justify-center px-4 md:px-8 py-4 md:py-8">
-      <div className="w-full max-w-sm md:max-w-md">
-        <div className="bg-surface rounded-lg p-4 md:p-6 border border-border-custom shadow-sm">
-          <div className="mb-6">
-            <div className="w-12 h-12 rounded-lg bg-navy/10 flex items-center justify-center mb-3">
-              <User className="w-7 h-7 text-navy" strokeWidth={2} />
+      <div className="w-full max-w-sm md:max-w-md animate-slideUp">
+        <div className="bg-surface rounded-xl p-6 border border-border-custom shadow-card">
+          <div className="mb-6 text-center">
+            <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-saffron to-saffron-deep flex items-center justify-center mx-auto mb-4 shadow-lg shadow-saffron/20">
+              <User className="w-7 h-7 text-white" strokeWidth={2} />
             </div>
-            <h2 className="text-base md:text-lg font-semibold text-navy mb-1">ऑपरेटर लॉगिन / Operator Login</h2>
-            <p className="text-xs md:text-sm text-muted-text">CSC सहायक का उपयोग करने के लिए प्रवेश करें</p>
+            <h2 className="text-lg font-bold text-navy mb-1">ऑपरेटर लॉगिन</h2>
+            <p className="text-sm text-muted-text">Operator Login</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-medium text-navy mb-1.5">
-                ऑपरेटर यूज़रनेम / Operator Username <span className="text-red-500">*</span>
+              <label className="block text-xs font-semibold text-navy mb-1.5">
+                यूज़रनेम / Username <span className="text-risk-red">*</span>
               </label>
-              <div className="relative">
-                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text" strokeWidth={2} />
+              <div className="relative group">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text group-focus-within:text-saffron transition-colors duration-200" strokeWidth={2} />
                 <input
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                   placeholder="Enter username"
-                  className="w-full min-h-[44px] md:h-10 pl-10 pr-3 rounded-md border border-border-custom bg-white text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron focus:border-transparent"
+                  className="w-full min-h-[44px] md:h-10 pl-10 pr-3 rounded-lg border border-border-custom bg-white text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron/30 focus:border-saffron transition-all duration-200"
                   autoComplete="username"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-navy mb-1.5">
-                ऑपरेटर ID <span className="text-red-500">*</span>
+              <label className="block text-xs font-semibold text-navy mb-1.5">
+                ऑपरेटर ID <span className="text-risk-red">*</span>
               </label>
-              <div className="relative">
-                <IdCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text" strokeWidth={2} />
+              <div className="relative group">
+                <IdCard className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-text group-focus-within:text-saffron transition-colors duration-200" strokeWidth={2} />
                 <input
                   type="text"
                   value={operatorId}
                   onChange={(e) => setOperatorId(e.target.value)}
                   placeholder="Enter operator ID"
-                  className="w-full h-10 pl-10 pr-3 rounded-md border border-border-custom bg-white text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 transition-all duration-200 focus:ring-saffron focus:border-transparent"
+                  className="w-full h-10 pl-10 pr-3 rounded-lg border border-border-custom bg-white text-sm text-navy placeholder:text-muted-text focus:outline-none focus:ring-2 focus:ring-saffron/30 focus:border-saffron transition-all duration-200"
                   autoComplete="off"
                 />
               </div>
             </div>
 
             {error && (
-              <div className="text-xs text-red-600 bg-red-50 border border-red-100 rounded-md px-3 py-2">
+              <div className="text-xs text-red-600 bg-red-50 border border-red-100 rounded-lg px-3 py-2.5">
                 {error}
               </div>
             )}
@@ -92,25 +92,25 @@ setTimeout(() => {
             <button
               type="submit"
               disabled={loading}
-              className="w-full min-h-[44px] rounded-md bg-saffron hover:bg-saffron-hover active:scale-95 text-white font-medium text-sm flex items-center justify-center gap-2 transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full min-h-[44px] rounded-lg bg-gradient-to-r from-saffron to-saffron-deep hover:from-saffron-hover hover:to-saffron-deep active:scale-[0.98] text-white font-semibold text-sm flex items-center justify-center gap-2 transition-all duration-200 shadow-md shadow-saffron/20 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-             {loading ? (
-  <>
-    <Loader2 className="w-4 h-4 animate-spin" />
-    <span>Loading...</span>
-  </>
-) : (
-  <>
-    <LogIn className="w-4 h-4" strokeWidth={2} />
-    <span>प्रवेश करें / Continue</span>
-  </>
-)}
+              {loading ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <span>Loading...</span>
+                </>
+              ) : (
+                <>
+                  <LogIn className="w-4 h-4" strokeWidth={2} />
+                  <span>प्रवेश करें / Continue</span>
+                </>
+              )}
             </button>
           </form>
 
           <div className="mt-6 pt-5 border-t border-border-custom text-center">
-            <p className="text-[10px] text-muted-text">
-              v1.0.0 • CHIPS Chhattisgarh • Government of India
+            <p className="text-[10px] text-muted-text font-medium">
+              v1.0.0 &mdash; CHIPS Chhattisgarh &mdash; Government of India
             </p>
           </div>
         </div>

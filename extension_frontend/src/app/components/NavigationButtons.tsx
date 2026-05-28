@@ -1,56 +1,38 @@
-import { useNavigate } from 'react-router';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface NavigationButtonsProps {
   onBack?: () => void;
   onNext?: () => void;
-  backLabel?: string;
-  nextLabel?: string;
   nextDisabled?: boolean;
-  showBack?: boolean;
-  showNext?: boolean;
+  nextLabel?: string;
 }
 
 export default function NavigationButtons({
   onBack,
   onNext,
-  backLabel = 'पीछे',
-  nextLabel = 'आगे बढ़ें',
   nextDisabled = false,
-  showBack = true,
-  showNext = true,
+  nextLabel = 'आगे बढ़ें',
 }: NavigationButtonsProps) {
-  const navigate = useNavigate();
-
-  const handleBack = () => {
-    if (onBack) {
-      onBack();
-    } else {
-      navigate(-1);
-    }
-  };
-
   return (
-    <div className="px-4 py-3 bg-white border-t border-border-custom sticky bottom-0">
+    <div className="sticky bottom-0 bg-white/90 backdrop-blur-md border-t border-border-custom px-4 py-3">
       <div className="flex gap-2.5">
-        {showBack && (
+        {onBack && (
           <button
-            onClick={handleBack}
-            className="flex-1 h-10 rounded-md bg-surface border border-border-strong hover:bg-slate-50 text-navy font-medium text-sm flex items-center justify-center gap-1.5 transition-colors"
+            onClick={onBack}
+            className="flex-1 h-11 rounded-lg bg-white border-2 border-slate-200 text-navy font-semibold text-sm flex items-center justify-center gap-1.5 transition-all duration-200 hover:border-slate-300 hover:bg-slate-50 active:scale-[0.98]"
           >
             <ChevronLeft className="w-4 h-4" strokeWidth={2.5} />
-            <span>{backLabel}</span>
+            <span>पीछे</span>
           </button>
         )}
-        
-        {showNext && (
+        {onNext && (
           <button
             onClick={onNext}
             disabled={nextDisabled}
-            className={`flex-1 h-10 rounded-md font-medium text-sm flex items-center justify-center gap-1.5 transition-colors ${
+            className={`flex-[2] h-11 rounded-lg font-semibold text-sm flex items-center justify-center gap-1.5 transition-all duration-200 active:scale-[0.98] ${
               nextDisabled
-                ? 'bg-slate-200 text-slate-400 cursor-not-allowed'
-                : 'bg-saffron hover:bg-saffron-hover text-white'
+                ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                : 'bg-gradient-to-r from-saffron to-saffron-deep text-white shadow-md shadow-saffron/20 hover:shadow-lg hover:shadow-saffron/30'
             }`}
           >
             <span>{nextLabel}</span>

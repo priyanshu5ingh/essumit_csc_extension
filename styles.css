@@ -5,31 +5,29 @@
 
 /* ---------- Design Tokens ---------- */
 :root {
-  /* Indian tri-colour palette */
-  --saffron:       #FF9933;
-  --saffron-dark:  #E8871F;
-  --saffron-light: #FFF3E0;
+  --saffron:       #D56B14;
+  --saffron-dark:  #B85810;
+  --saffron-light: #FEF6ED;
   --white:         #FFFFFF;
-  --green:         #138808;
-  --green-light:   #E8F5E9;
-  --green-dark:    #0D6B06;
-  --navy:          #000080;
+  --green:         #138944;
+  --green-light:   #F0F9F4;
+  --green-dark:    #0C6632;
+  --navy:          #1A2332;
+  --navy-light:    #2C3E50;
 
-  /* Neutral palette */
-  --bg-primary:    #F0F2F5;
+  --bg-primary:    #F8FAFC;
   --bg-secondary:  #FFFFFF;
-  --text-primary:  #1A1A2E;
-  --text-secondary:#5A5A7A;
-  --text-muted:    #8E8EA0;
-  --border:        #E0E0E0;
-  --shadow:        rgba(0, 0, 0, 0.08);
+  --text-primary:  #1A2332;
+  --text-secondary:#475569;
+  --text-muted:    #64748B;
+  --border:        #E2E8F0;
+  --border-strong: #CBD5E1;
+  --shadow:        rgba(0, 0, 0, 0.06);
 
-  /* Chat bubbles */
   --bubble-bot:    #FFFFFF;
-  --bubble-user:   #DCF8C6;
-  --bubble-error:  #FFE0E0;
+  --bubble-user:   #D56B14;
+  --bubble-error:  #FEE2E2;
 
-  /* Sizing */
   --panel-width:   100%;
   --header-height: 56px;
   --input-height:  56px;
@@ -37,8 +35,7 @@
   --radius-md:     12px;
   --radius-lg:     16px;
 
-  /* Typography */
-  --font-family:   'Segoe UI', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
+  --font-family:   'Inter', 'Noto Sans Devanagari', system-ui, -apple-system, sans-serif;
   --font-xs:       11px;
   --font-sm:       13px;
   --font-md:       14px;
@@ -1037,7 +1034,7 @@ html, body {
   justify-content: space-between;
   align-items: center;
   padding: 12px 16px;
-  background: linear-gradient(135deg, var(--saffron), #E8871F);
+  background: linear-gradient(135deg, var(--saffron), var(--saffron-dark));
   color: white;
   font-weight: 600;
   font-size: var(--font-sm);
